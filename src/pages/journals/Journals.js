@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { DataGrid } from '@mui/x-data-grid';
+import JournalDetails from './JournalDetails';
+import { useEffect, useState } from 'react';
 
 const Journals = () => {
 
-	fetch('http://127.0.0.1:8000/api/journals',
-		{
-			method:"GET",
-			headers:
-			{
-				"Content-Type" : "application/text",
-			}
-		})
-		.then((response) => response.json())
-		.then((value) => results(value))
+	const [journals, setJournal] = useState({});
+
+	useEffect(() => {
+		fetch('http://127.0.0.1:8000/api/journals')
+			.then(res => res.json())
+			.then(json => setJournal(json))
+			.catch(err => console.error(err));
+	}, []);
 
 	const columns = [
 		{ field: "id", headerName: "Id", width: 50 },
@@ -24,42 +24,25 @@ const Journals = () => {
 		{ field: "endDate", headerName: "Data de Término", type: "number",	width: 140 },
 	];
 
-	function results(data)
-	{
-		const content = []
+	const handleRowClick = rowData => {
+		ReactDOM.render(<JournalDetails idJournal={rowData.id} />, document.getElementById('appView'));
+	};
 
-		const rows = data.map(data => {
-			return {
-				id: data.id,
-				titles: data.titles,
-				noIssues: data.noIssues,
-				noPages: data.noPages,
-				startDate: data.startDate,
-				endDate: data.endDate,
-			}
-		});
-
-		content.push(
-			<DataGrid
-				rows={rows}
-				key={(row) => row.id}
-				columns={columns}
-				pageSize={15}
-				onRowClick={(data)=>console.log(data.id)}
-				rowsPerPageOptions={[4]}
-			/>
-		)
-
-		return (
-			ReactDOM.render(content, document.getElementById('appView'))
-		);
-	}
+	return (
+		<DataGrid
+			rows={journals}
+			key={(row) => row.id}
+			columns={columns}
+			pageSize={15}
+			onRowClick={handleRowClick}
+			rowsPerPageOptions={[4]}
+		/>
+	);
 
 	function getYears(data)
 	{
 		
 	}
-
-}
+};
 
 export default Journals;
