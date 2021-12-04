@@ -26,7 +26,7 @@ import Contribution from '../pages/Contribution.js'
 import Files from '../pages/Files.js'
 import Funds from '../pages/Funds.js'
 import Localization from '../pages/Localization.js'
-import Journals from '../pages/Journals.js'
+import Journals from '../pages/journals/Journals.js'
 import News from '../pages/News.js'
 import Search from '../pages/Search.js'
 
