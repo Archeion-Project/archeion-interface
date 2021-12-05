@@ -29,10 +29,15 @@ import Localization from '../pages/Localization.js'
 import Journals from '../pages/journals/Journals.js'
 import News from '../pages/News.js'
 import Search from '../pages/Search.js'
+import ReactDOM from 'react-dom';
 
 const drawerWidth = 240;
 
 export default function MainPage() {
+
+	const render = component => {
+		ReactDOM.render(component, document.getElementById('appView'));
+	};
 
 	return (
 		<Box sx={{ display: 'flex' }}>
@@ -70,7 +75,7 @@ export default function MainPage() {
 						</ListItemIcon>
 							<ListItemText primary='Buscar no Acervo' />
 					</ListItemButton>
-					<ListItemButton onClick={() => Journals()}>
+					<ListItemButton onClick={() => render(<Journals />)}>
 						<ListItemIcon>
 							<NewspaperIcon />
 						</ListItemIcon>

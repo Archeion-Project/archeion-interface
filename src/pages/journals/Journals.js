@@ -5,22 +5,16 @@ import JournalYears from './JournalYears.js'
 
 const Journals = () => {
 
-	fetch('http://127.0.0.1:8000/api/journals',
-		{
-			method:"GET",
-			headers:
-			{
-				"Content-Type" : "application/text",
-			}
-		})
-		.then((response) => response.json())
-		.then((value) => results(value))
+	fetch('http://127.0.0.1:8000/api/journals')
+		.then(res => res.json())
+		.then(json => results(json))
+		.catch(err => console.error(err));
 
 	const columns = [
-		{ field: "id", headerName: "Id", width: 50 },
-		{ field: "titles", headerName: "Título", width: 300 },
-		{ field: "noIssues", headerName: "nº de edições", width: 120 },
-		{ field: "noPages", headerName: "nº de páginas", width: 120 },
+		{ field: "id", headerName: "Id", type: "number", width: 50 },
+		{ field: "titles", headerName: "Título", type: "text", width: 300 },
+		{ field: "noIssues", headerName: "nº de edições", type: "number", width: 120 },
+		{ field: "noPages", headerName: "nº de páginas", type: "number", width: 120 },
 		{ field: "startDate", headerName: "Data de Início",	type: "number", width: 120 },
 		{ field: "endDate", headerName: "Data de Término", type: "number",	width: 140 },
 	];
