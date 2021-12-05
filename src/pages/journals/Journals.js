@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { DataGrid } from '@mui/x-data-grid';
+import JournalYears from './JournalYears.js'
 
 const Journals = () => {
 
@@ -45,7 +46,7 @@ const Journals = () => {
 				key={(row) => row.id}
 				columns={columns}
 				pageSize={15}
-				onRowClick={(data)=>console.log(data.id)}
+				onRowClick={(data) => getYears(data.id)}
 				rowsPerPageOptions={[4]}
 			/>
 		)
@@ -57,7 +58,7 @@ const Journals = () => {
 
 	function getYears(data)
 	{
-		
+		JournalYears(data)
 	}
 
 }
