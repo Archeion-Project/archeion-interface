@@ -59,6 +59,11 @@ const JournalYears = (id) => {
 
 			</Box>
 		)
+		content.push(
+			<Box>
+			</Box>
+
+		)
 		
 		return (
 			ReactDOM.render(content, document.getElementById('appView'))

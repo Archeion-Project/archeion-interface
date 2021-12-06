@@ -136,7 +136,7 @@ export default function MainPage() {
 			</Drawer>
 			<Box
 				component="main"
-				sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+				sx={{ flexGrow: 1, bgcolor: 'grey', p: 3 }}
 			>
 				<div id="appView"></div>
 				<Toolbar />

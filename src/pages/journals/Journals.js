@@ -8,7 +8,7 @@ const Journals = () => {
 	fetch('http://127.0.0.1:8000/api/journals')
 		.then(res => res.json())
 		.then(json => results(json))
-		.catch(err => console.error(err));
+		.catch(error => {console.log(error)})
 
 	const columns = [
 		{ field: "id", headerName: "Id", type: "number", width: 50 },

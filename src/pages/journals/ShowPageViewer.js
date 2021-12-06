@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom';
-import OpenSeaDragon from "../../components/openseadragon-bin-2.4.2/openseadragon.js";
+import Journals from './Journals.js'
+import Lightbox from "react-awesome-lightbox";
+import "react-awesome-lightbox/build/style.css";
 
 const ShowPageViewer = (pageId) => {
 
@@ -12,33 +14,36 @@ const ShowPageViewer = (pageId) => {
 			}
 		})
 		.then((response) => response.json())
-		.then((value) => results(value))
+		.then((value) => imagem(value))
+		.catch(error => {console.log(error)})
 
-
-	function results(data)
+	function imagem(value)
 	{
-		console.log(data)
-		console.log(data.pagePath)
+		console.log(value.filePaths)
 
-		const viewer = new OpenSeaDragon.Viewer({
-			type: "zoomifytileservice",
-			id: "page-viewer",
-			prefixUrl: "/openseadragon-bin-2.4.2/images/",
-			showRotationControl: true,
-			showNavigator:  true,
-			gestureSettingsTouch: {
-				pinchRotate: true
-			},
-			tileSources: {
-				type: 'image',
-				url:  data.pagePath,
-			}
-		});
+		let image = [];
+		let lista = [{
+				url:value.pagePath,
+				title:value.journaTitle
+			}]
 
-		console.log(viewer)
+		image.push(
+			<Lightbox
+				images={value.filePaths}
+				title="Archeion"
+				startIndex={value.startIndex}
+				allowReset={true}
+				onClose={() => removeViewer()}
+			/>
+		)
+
+		return ReactDOM.render(image, document.getElementById("page-viewer"));
 	}
 
+	function removeViewer()
+	{
+		ReactDOM.render('', document.getElementById("page-viewer"))
+	}
 }
-
 
 export default ShowPageViewer;
