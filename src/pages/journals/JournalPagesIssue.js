@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ShowPageViewer from './ShowPageViewer.js'
+import TextField from '@mui/material/TextField';
 
 const JournalPagesIssue = (journalId, year, month, issue) => {
 
@@ -22,6 +23,7 @@ const JournalPagesIssue = (journalId, year, month, issue) => {
 	function results(data)
 	{
 		const content = []
+		const citation = []
 
 		content.push(
 			<FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -29,29 +31,64 @@ const JournalPagesIssue = (journalId, year, month, issue) => {
 			  <Select
 				labelId="journal-pages"
 				id="journal-pages"
-				label="Páginas"
+				label="Página"
 				onChange={(page) => getPageView(page)}
 			  >
 				{data.pages.map((key, value) => {
 					return (
-						<MenuItem value={key.id}>{key.page_number}</MenuItem>
+						<MenuItem
+							key={'page' + key.id}
+							value={key.id}
+							onClick={() => setPageCitation(data, key.page_number)}
+							onChange={() => setPageCitation(data, key.page_number)}
+							>{key.page_number}</MenuItem>
 						)
 					})
 				}
 				</Select>
 			</FormControl>
 		)
-	
+
 		return (
 			ReactDOM.render(content, document.getElementById('page'))
 		);
+	}
+
+	function setPageCitation(data, page)
+	{
+		var citationLabel = []
+		var citationTextField = []
+		
+		citationLabel.push(
+			data.journalTitle
+			+ ', ' + 
+			data.localization
+			+ ', ' + 
+			data.citationDate
+			+ ', p.' + 
+			page
+			+ ' <http://archeion.br/hemeroteca-digital> Acesso em '
+			+ data.now)
+
+		citationTextField.push(
+			<TextField
+				id="citation"
+				label="Citação"
+				value={citationLabel}
+				fullWidth={true}
+				InputProps={{
+					readOnly: true,
+				}}
+			/>
+		)
+	
+		ReactDOM.render(citationTextField, document.getElementById('citation-viewer'))
 	}
 
 	function getPageView(pageId)
 	{
 		ShowPageViewer(pageId.target.value)
 	}
-
 
 }
 
