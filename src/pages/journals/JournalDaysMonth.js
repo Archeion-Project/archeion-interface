@@ -28,6 +28,7 @@ const JournalDaysMonth = (journalId, year, month) => {
 			<FormControl sx={{ m: 1, minWidth: 120 }}>
 			  <InputLabel id="journal-issues">Edição</InputLabel>
 			  <Select
+			  	key={(issue) => issue.target.value}
 				labelId="journal-issues"
 				id="journal-issues"
 				label="Edição"
@@ -35,7 +36,10 @@ const JournalDaysMonth = (journalId, year, month) => {
 			  >
 				{data.days.map((key, value) => {
 					return (
-						<MenuItem value={key}>{key}</MenuItem>
+						<MenuItem
+							key={'day' + key}
+							value={key}
+						>{key}</MenuItem>
 						)
 					})
 				}
