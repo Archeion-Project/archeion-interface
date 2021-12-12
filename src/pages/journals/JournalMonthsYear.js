@@ -36,7 +36,10 @@ const JournalMonthsYear = (journalId, year) => {
 			  >
 				{data.months.map((key, value) => {
 					return (
-						<MenuItem value={key}>{key}</MenuItem>
+						<MenuItem
+							key={'month' + key}
+							value={key}
+						>{key}</MenuItem>
 						)
 					})
 				}
