@@ -8,7 +8,7 @@ const Journals = () => {
 	fetch('http://127.0.0.1:8000/api/journals')
 		.then(res => res.json())
 		.then(json => results(json))
-		.catch(error => {console.log(error)})
+		.catch(err => console.error(err));
 
 	const columns = [
 		{ field: "id", headerName: "Id", type: "number", width: 50 },
@@ -31,18 +31,22 @@ const Journals = () => {
 				noPages: data.noPages,
 				startDate: data.startDate,
 				endDate: data.endDate,
+				key: data.id,
 			}
 		});
 
 		content.push(
-			<DataGrid
-				rows={rows}
-				key={(row) => row.id}
-				columns={columns}
-				pageSize={15}
-				onRowClick={(data) => getYears(data.id)}
-				rowsPerPageOptions={[4]}
-			/>
+			<div key={(data) => data.id} style={{ height:900, width:'100%' }}>
+				<h2>Hemeroteca Juizforana</h2>
+				<DataGrid
+					rows={rows}
+					key={(data) => 'journal' + data.id}
+					columns={columns}
+					pageSize={15}
+					onRowClick={(data) => getYears(data.id)}
+					rowsPerPageOptions={[4]}
+				/>
+			</div>
 		)
 
 		return (
