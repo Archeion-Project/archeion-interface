@@ -75,7 +75,7 @@ export default function MainPage() {
 						</ListItemIcon>
 							<ListItemText primary='Buscar no Acervo' />
 					</ListItemButton>
-					<ListItemButton onClick={() => render(<Journals />)}>
+					<ListItemButton onClick={() => Journals()}>
 						<ListItemIcon>
 							<NewspaperIcon />
 						</ListItemIcon>
@@ -138,7 +138,7 @@ export default function MainPage() {
 				component="main"
 				sx={{ flexGrow: 1, bgcolor: 'grey', p: 3 }}
 			>
-				<div id="appView"></div>
+					<div id="appView"></div>
 				<Toolbar />
 			</Box>
 		</Box>
