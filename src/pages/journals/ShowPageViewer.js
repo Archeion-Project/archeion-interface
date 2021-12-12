@@ -19,13 +19,7 @@ const ShowPageViewer = (pageId) => {
 
 	function imagem(value)
 	{
-		console.log(value.filePaths)
-
 		let image = [];
-		let lista = [{
-				url:value.pagePath,
-				title:value.journaTitle
-			}]
 
 		image.push(
 			<Lightbox
