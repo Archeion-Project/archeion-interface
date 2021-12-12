@@ -26,13 +26,18 @@ import Contribution from '../pages/Contribution.js'
 import Files from '../pages/Files.js'
 import Funds from '../pages/Funds.js'
 import Localization from '../pages/Localization.js'
-import Journals from '../pages/Journals.js'
+import Journals from '../pages/journals/Journals.js'
 import News from '../pages/News.js'
 import Search from '../pages/Search.js'
+import ReactDOM from 'react-dom';
 
 const drawerWidth = 240;
 
 export default function MainPage() {
+
+	const render = component => {
+		ReactDOM.render(component, document.getElementById('appView'));
+	};
 
 	return (
 		<Box sx={{ display: 'flex' }}>
@@ -131,9 +136,9 @@ export default function MainPage() {
 			</Drawer>
 			<Box
 				component="main"
-				sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+				sx={{ flexGrow: 1, bgcolor: 'grey', p: 3 }}
 			>
-				<div id="appView"></div>
+					<div id="appView"></div>
 				<Toolbar />
 			</Box>
 		</Box>
